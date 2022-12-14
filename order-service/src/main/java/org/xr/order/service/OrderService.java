@@ -28,7 +28,7 @@ public class OrderService {
         // 创建自定义订单实体类
         OrderDto orderDto = new OrderDto();
         BeanUtils.copyProperties(order,orderDto);
-        User user = userServiceClient.queryById(order.getId());
+        User user = userServiceClient.queryById(order.getUserId());
         orderDto.setUser(user);
         return  orderDto;
     }

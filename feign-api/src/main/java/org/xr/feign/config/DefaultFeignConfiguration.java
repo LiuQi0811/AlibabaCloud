@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Bean;
  * - FULL：记录所有请求和响应的明细，包括头信息、请求体、元数据。
  *
  * 如果要**全局生效**，将其放到启动类的@EnableFeignClients这个注解中：
+ * @EnableFeignClients(defaultConfiguration = DefaultFeignConfiguration.class)
+ * 如果是**局部生效**，则把它放到对应的@FeignClient这个注解中
  * @EnableFeignClients(clients = UserServiceClient.class,defaultConfiguration = DefaultFeignConfiguration.class)
  */
 public class DefaultFeignConfiguration
