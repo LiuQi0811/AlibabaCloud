@@ -9,23 +9,6 @@ spring:
     password: e6ZhRGBE6SKYhFXA
     driver-class-name: com.mysql.jdbc.Driver
 
-  cloud:
-    nacos:
-      discovery:
-        # 集群配置
-        cluster-name: QD     #集群名称
-        # 环境隔离
-        namespace: b78633de-a389-49aa-b46e-39183e552556  # 命名空间 填id
-        # 配置一个服务实例为永久实例
-        ephemeral: false  #设置为非临时实例
-  #修改负载均衡规则
-  user-service:
-    ribbon:
-      NFLoadBalancerRuleClassName:  com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则
-
-
-
-
 mybatis:
   type-aliases-package: org.xr.order.entity
   configuration:
@@ -38,4 +21,15 @@ logging:
 pattern:
   name: 本地环境local
 
+#feign的日志
+feign:
+  client:
+    config:
+      default: # 这里用default就是全局配置，如果是写服务名称，则是针对某个微服务的配置
+        loggerLevel: full
+#而日志的级别分为四种：
+#- NONE：不记录任何日志信息，这是默认值。
+#- BASIC：仅记录请求的方法，URL以及响应状态码和执行时间
+#- HEADERS：在BASIC的基础上，额外记录了请求和响应的头信息
+#- FULL：记录所有请求和响应的明细，包括头信息、请求体、元数据。
 

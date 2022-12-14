@@ -6,10 +6,6 @@ spring:
     username: user
     password: FsZaBZtWx3RGEA2h
     driver-class-name: com.mysql.jdbc.Driver
-  shardingsphere:
-    sharding:
-      default-database-strategy:
-      tables:
 mybatis:
   type-aliases-package: org.xr.user.entity
   configuration:
