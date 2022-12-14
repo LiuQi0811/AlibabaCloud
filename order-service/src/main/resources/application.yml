@@ -1,0 +1,41 @@
+server:
+  port: 7772
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/order?useSSL=false
+    username: order
+    password: e6ZhRGBE6SKYhFXA
+    driver-class-name: com.mysql.jdbc.Driver
+
+  cloud:
+    nacos:
+      discovery:
+        # 集群配置
+        cluster-name: QD     #集群名称
+        # 环境隔离
+        namespace: b78633de-a389-49aa-b46e-39183e552556  # 命名空间 填id
+        # 配置一个服务实例为永久实例
+        ephemeral: false  #设置为非临时实例
+  #修改负载均衡规则
+  user-service:
+    ribbon:
+      NFLoadBalancerRuleClassName:  com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则
+
+
+
+
+mybatis:
+  type-aliases-package: org.xr.order.entity
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    org.xr: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+pattern:
+  name: 本地环境local
+
+
