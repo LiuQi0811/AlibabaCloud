@@ -20,6 +20,8 @@ spring:
           uri: lb://user-service # 路由的目标地址 lb就是负载均衡，后面跟服务名称
           predicates: # 路由断言，也就是判断请求是否符合路由规则的条件
             - Path=/user/** # 这个是按照路径匹配，只要以/user/开头就符合要求
+          filters: #过滤器
+            - AddRequestHeader=Truth, xr is freaking awesome! # 添加请求头
         - id: order-service-id
           uri: lb://order-service
           predicates:
