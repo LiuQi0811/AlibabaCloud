@@ -2,6 +2,7 @@ package org.xr.feign.config;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;
+import org.xr.feign.clients.fallback.UserServiceClientFallbackFactory;
 
 /**
  * @author LiuQi
@@ -25,4 +26,10 @@ public class DefaultFeignConfiguration
     public Logger.Level loggerLevel(){
         return Logger.Level.BASIC;
     }
+
+    @Bean
+    public UserServiceClientFallbackFactory userServiceClientFallbackFactory(){
+        return new UserServiceClientFallbackFactory();
+    }
+
 }

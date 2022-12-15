@@ -1,5 +1,6 @@
 package org.xr.order.service;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
@@ -31,5 +32,10 @@ public class OrderService {
         User user = userServiceClient.queryById(order.getUserId());
         orderDto.setUser(user);
         return  orderDto;
+    }
+
+    @SentinelResource(value = "goods")
+    public void queryGoods(){
+        System.err.println("查询商品");
     }
 }

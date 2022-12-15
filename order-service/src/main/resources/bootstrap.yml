@@ -18,3 +18,8 @@ spring:
       user-service:
         ribbon:
           NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则
+    # sentinel配置
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      web-context-unify: false # 关闭context整合
