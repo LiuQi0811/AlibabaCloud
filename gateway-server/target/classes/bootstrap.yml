@@ -14,6 +14,8 @@ spring:
       config:
         file-extension: yaml  # 配置文件后缀名
     gateway:
+      default-filters:
+        - AddRequestHeader=origin,gateway
       routes: # 网关路由配置
         - id: user-service-id # 路由id，自定义，只要唯一即可
           # uri: http://127.0.0.1:8081 # 路由的目标地址 http就是固定地址
@@ -42,6 +44,7 @@ spring:
             allowedHeaders: "*" # 允许在请求中携带的头信息
             allowCredentials: true # 是否允许携带cookie
             maxAge: 360000 # 这次跨域检测的有效期
+
 
 
 
