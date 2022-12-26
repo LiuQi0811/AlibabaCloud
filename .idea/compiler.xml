@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="item-service" />
         <module name="gateway-server" />
         <module name="storage-server" />
         <module name="order-service" />
@@ -21,6 +22,7 @@
       <module name="account-server" options="-parameters" />
       <module name="feign-api" options="-parameters" />
       <module name="gateway-server" options="-parameters" />
+      <module name="item-service" options="-parameters" />
       <module name="order-server" options="-parameters" />
       <module name="order-service" options="-parameters" />
       <module name="seata-server" options="" />

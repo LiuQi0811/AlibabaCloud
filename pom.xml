@@ -10,6 +10,7 @@
         <module>feign-api</module>
         <module>gateway-server</module>
         <module>seata-server</module>
+        <module>item-service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
