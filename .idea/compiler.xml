@@ -7,17 +7,24 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gateway-server" />
+        <module name="storage-server" />
         <module name="order-service" />
         <module name="user-service" />
+        <module name="order-server" />
         <module name="feign-api" />
+        <module name="account-server" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="account-server" options="-parameters" />
       <module name="feign-api" options="-parameters" />
       <module name="gateway-server" options="-parameters" />
+      <module name="order-server" options="-parameters" />
       <module name="order-service" options="-parameters" />
+      <module name="seata-server" options="" />
+      <module name="storage-server" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
