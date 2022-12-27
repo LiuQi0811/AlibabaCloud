@@ -22,13 +22,13 @@ public class ItemController {
     private ItemStockService stockService;
 
     @Autowired
-    private Cache<Long,Item> itemCache;
+    private Cache<Long, Item> itemCache;
     @Autowired
-    private Cache<Long, ItemStock> stockCache;
+    private Cache<Long, ItemStock> itemStockCache;
 
     @RequestMapping(value = "/list")
-    public PageDTO queryItemPage( @RequestParam(value = "page", defaultValue = "1") Integer page,
-                                  @RequestParam(value = "size", defaultValue = "5") Integer size){
+    public PageDTO queryItemPage(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                 @RequestParam(value = "size", defaultValue = "5") Integer size) {
         Page<Item> result = itemService.query()
                 .ne("status", 3)
                 .page(new Page<>(page, size)); // 分页查询商品
@@ -40,13 +40,23 @@ public class ItemController {
                     item.setSold(itemStock.getSold());
                 }).collect(Collectors.toList());// 查询库存
 
-        return new PageDTO(result.getTotal(),items); // 封装返回
+        return new PageDTO(result.getTotal(), items); // 封装返回
     }
 
-    @RequestMapping(value = "/{id}")
-    public Item findById(@PathVariable("id") Long id){
-        return null;
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Item findById(@PathVariable("id") Long id) {
+        return itemCache.get(id, key -> itemService.query()
+                .ne("status", 3)
+                .eq("id", key)
+                .one());
     }
+
+    @RequestMapping(value = "/stock/{id}")
+    public ItemStock findStockById(@PathVariable(name = "id") Long id) {
+        return itemStockCache.get(id, key ->
+                stockService.getById(key));
+    }
+
 
     @RequestMapping(method = RequestMethod.POST)
     public void saveItem(@RequestBody Item item) {
@@ -58,12 +68,12 @@ public class ItemController {
         itemService.updateById(item);
     }
 
-    @RequestMapping(value = "/stock",method = RequestMethod.PUT)
+    @RequestMapping(value = "/stock", method = RequestMethod.PUT)
     public void updateStock(@RequestBody ItemStock itemStock) {
         stockService.updateById(itemStock);
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable("id") Long id) {
         itemService.update().set("status", 3).eq("id", id).update();
     }
